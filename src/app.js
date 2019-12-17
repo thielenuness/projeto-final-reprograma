@@ -2,15 +2,23 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
-const index = require('./routes/index');
+const grupos = require('./routes/grupos');
 const hospitais = require('./routes/hospitais')
+const PORT = 3000
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/', index);
+app.use('/grupos', grupos);
 app.use('/hospitais', hospitais);
 
-module.exports = app;
+
+app.get('/', (request, response) => {
+    response.send('Está procurando ajuda? Liste aqui alguns hospitais ou grupos disponiveis')
+  })
+  
+  app.listen(PORT)
+console.info(`Está rodando na porta ${PORT}`)
+
 
 
 

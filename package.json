@@ -1,19 +1,24 @@
 {
-  "name": "pack",
+  "name": "reprograma-backend",
   "version": "1.0.0",
-  "description": "Repositório com todos os temas abordados durante o curso de backend",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js"
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Thiele",
+  "keywords": [],
+  "author": "Thiele Nunes",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.8.1"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "5.5.14"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }

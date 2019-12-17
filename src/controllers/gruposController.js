@@ -1,88 +1,84 @@
 const { connect } = require('../models/repository')
-const hospitaisModel = require('../models/hospitaisSchema')
 const { gruposModel } = require('../models/gruposSchema')
-
 
 connect()
 
-
 const getAll = (request, response) => {
-  hospitaisModel.find((error, hospital) => {
+  gruposModel.find((error, grupos) => {
     if (error) {
       return response.status(500).send(error)
     }
 
-    return response.status(200).send(hospital)
+    return response.status(200).send(grupos)
   })
 }
 
 const getById = (request, response) => {
   const id = request.params.id
 
-  return hospitaisModel.findById(id, (error, hospital) => {
+  return gruposModel.findById(id, (error, grupos) => {
     if (error) {
       return response.status(500).send(error)
     }
 
-    if (hospital) {
-      return response.status(200).send(hospital)
+    if (grupos) {
+      return response.status(200).send(grupos)
     }
 
-    return response.status(404).send('Hospital não encontrado.')
+    return response.status(404).send('Grupo não existente.')
   })
 }
 
 const add = (request, response) => {
-  const novoHospital = new hospitaisModel(request.body)
+  const novoGrupo = new gruposModel(request.body)
 
-  novoHospital.save((error) => {
+  novoGrupo.save((error) => {
     if (error) {
       return response.status(500).send(error)
     }
 
-    return response.status(201).send(novoHospital)
+    return response.status(201).send(novoGrupo)
   })
 }
 
 const remove = (request, response) => {
   const id = request.params.id
 
-  hospitaisModel.findByIdAndDelete(id, (error, hospital) => {
+  gruposModel.findByIdAndDelete(id, (error, grupos) => {
     if (error) {
       return response.status(500).send(error)
     }
 
-    if (hospital) {
+    if (grupos) {
       return response.status(200).send(id)
     }
 
-    return response.status(404).send('Hospital não encontrado.')
+    return response.status(404).send('Grupo não existente.')
   })
 }
 
 const update = (request, response) => {
   const id = request.params.id
-  const hospitalUpdate = request.body
+  const gruposUpdate = request.body
   const options = { new: true }
 
- hospitaisModel.findByIdAndUpdate(
+  gruposModel.findByIdAndUpdate(
     id,
-    hospitalUpdate,
+    gruposUpdate,
     options,
-    (error, hospital) => {
+    (error, grupos) => {
       if (error) {
         return response.status(500).send(error)
       }
 
-      if (hospital) {
-        return response.status(200).send(hospital)
+      if (grupos) {
+        return response.status(200).send(grupos)
       }
 
-      return response.status(404).send('Hospital não encontrado.')
+      return response.status(404).send('Grupo não existente.')
     }
   )
 }
-
 
 
 module.exports = {
@@ -90,5 +86,5 @@ module.exports = {
   getById,
   add,
   remove,
-  update,
+  update
 }
